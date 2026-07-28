@@ -2,7 +2,7 @@ name: Trigger OpenShift Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ update-apps ]
 
 jobs:
   trigger-build:
