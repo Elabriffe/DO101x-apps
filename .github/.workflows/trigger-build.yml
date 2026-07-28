@@ -1,0 +1,18 @@
+name: Trigger OpenShift Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger BuildConfig
+        run: |
+          curl -k -X POST \
+            "https://api.rm1.0a51.p1.openshiftapps.com:6443/apis/build.openshift.io/v1/namespaces/edlabo-dev/buildconfigs/version/webhooks/vfsEUS6eYonkW41RqBRM/generic" \
+            -H "Authorization: Bearer ${{ secrets.OPENSHIFT_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: push" \
+            -d '{}'
